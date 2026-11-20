@@ -1,0 +1,404 @@
+:root{
+  --red:#b14a38; --red-deep:#8f382a; --red-soft:#c76852; --red-wash:#f9ece6;
+  --gold:#c99a4e; --gold-wash:#faf1dc;
+  --ink:#3e2e26; --ink-soft:#6b5447; --sub:#8a7567; --line:#e8dcc9;
+  --bg:#faf5ea; --card:#fffdf7; --green:#5f8b7c; --green-wash:#e9f2ec;
+  --shadow:0 2px 12px rgba(90,60,35,.07);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:#e9e0d2;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink)}
+.app{max-width:440px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;box-shadow:0 0 40px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.topbar{height:54px;background:var(--bg);color:var(--ink);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line)}
+.topbar h1{font-size:17px;font-weight:600;margin:0;flex:1;letter-spacing:.5px;font-family:"Songti SC","STSong",serif}
+.icon-btn.back{font-size:26px;line-height:1;margin-right:8px;width:26px;text-align:left;background:none;border:0;color:var(--ink);cursor:pointer}
+.topbar-right{display:flex;align-items:center;gap:6px}
+.region-btn{background:var(--card);border:1px solid var(--line);color:var(--ink-soft);font-size:12.5px;padding:6px 11px;border-radius:16px;cursor:pointer}
+.icon-btn{background:none;border:0;color:var(--ink-soft);font-size:18px;cursor:pointer;width:32px;height:32px;border-radius:50%}
+main{flex:1;padding-bottom:66px}
+.view{padding:0 0 28px;animation:fadeIn .28s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* 首页主视觉：温暖插画横幅 */
+.today-hero{background:var(--card);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-art{display:block;width:100%;height:185px;object-fit:cover;object-position:center 78%}
+.today-hero-body{padding:16px 20px 18px;background:linear-gradient(180deg,transparent,var(--card) 30%)}
+.today-solar{font-size:13px;color:var(--sub)}
+.today-lunar{font-size:30px;font-weight:600;margin-top:3px;letter-spacing:1px;font-family:"Songti SC","STSong",serif;color:var(--ink)}
+.today-next{font-size:12.5px;margin-top:10px;display:inline-block;background:var(--gold-wash);color:#8a6a2f;padding:5px 12px;border-radius:14px}
+.overseas-chip{position:absolute;right:14px;top:14px;background:rgba(255,253,247,.92);color:var(--red);font-size:11px;padding:4px 10px;border-radius:12px;font-weight:600;box-shadow:var(--shadow)}
+
+/* 结论条 */
+.verdict{margin:14px 16px 4px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;display:flex;align-items:flex-start;gap:12px;box-shadow:var(--shadow)}
+.verdict-ico{width:38px;height:38px;flex:none;border-radius:12px;overflow:hidden;background:var(--green-wash)}
+.verdict-ico img{width:100%;height:100%;object-fit:cover}
+.verdict-body{flex:1;min-width:0}
+.verdict-main{font-size:19px;font-weight:600;color:var(--ink);line-height:1.4;font-family:"Songti SC","STSong",serif}
+.verdict.yes .verdict-main{color:var(--red)}
+.verdict.soft{border-color:#e9d9ae;background:linear-gradient(180deg,#fffaf0,var(--card))}
+.verdict.soft .verdict-main{color:#8a6a2f}
+.verdict.soft .verdict-ico{background:var(--gold-wash)}
+.verdict-sub{font-size:12.5px;color:var(--sub);line-height:1.6;margin-top:4px}
+
+/* 通用卡片 */
+.today-cards{padding:12px 16px}
+.occ-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow)}
+.occ-card:active{transform:scale(.982)}
+.occ-top{display:flex;justify-content:space-between;align-items:center}
+.occ-badge{font-size:11px;padding:3px 10px;border-radius:10px;background:var(--red-wash);color:var(--red)}
+.occ-badge.lv3{background:var(--red);color:#fff}
+.occ-badge.lv2{background:var(--gold-wash);color:#946118}
+.occ-arrow{font-size:12px;color:var(--sub)}
+.occ-name{font-size:21px;font-weight:600;margin:10px 0 4px;font-family:"Songti SC","STSong",serif}
+.occ-deity{font-size:13.5px;color:var(--red-soft);font-weight:500}
+.occ-summary{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-top:8px}
+.occ-foot{border-top:1px dashed var(--line);margin-top:12px;padding-top:11px;display:flex;justify-content:space-between;font-size:12px;color:var(--sub)}
+.occ-cta{color:var(--red);font-weight:600}
+.empty-state{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;text-align:center;box-shadow:var(--shadow)}
+.empty-art{width:96px;height:96px;object-fit:contain;margin:0 auto 6px;display:block}
+.empty-title{font-size:16px;font-weight:600;font-family:"Songti SC","STSong",serif}
+.empty-desc{font-size:13px;color:var(--sub);line-height:1.7;margin-top:8px}
+.tip-bar{margin:6px 16px;background:var(--green-wash);color:#4a6b57;font-size:12px;padding:11px 13px;border-radius:12px;display:flex;gap:9px;align-items:flex-start;line-height:1.6}
+.tip-icon{background:var(--green);color:#fff;width:17px;height:17px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex:none;margin-top:1px}
+
+/* 日历 */
+.cal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px}
+.cal-title{font-size:19px;font-weight:600;font-family:"Songti SC","STSong",serif}
+.cal-nav{width:34px;height:34px;border:1px solid var(--line);background:var(--card);border-radius:50%;font-size:20px;color:var(--ink-soft);cursor:pointer;line-height:1}
+.cal-wrap{padding:0 14px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow)}
+.cal-dow{text-align:center;font-size:12px;color:var(--sub);padding-bottom:8px}
+.cal-cell{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:background .15s}
+.cal-cell:active{background:var(--red-wash)}
+.cal-cell.empty{cursor:default}
+.cal-num{font-size:14px}
+.cal-dot{position:absolute;bottom:7px;font-size:16px;line-height:.5;color:var(--gold)}
+.cal-cell.has-big .cal-dot{color:var(--red)}
+.cal-cell.today .cal-num{background:var(--red);color:#fff;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cal-cell.has-ev:not(.today){background:#faf4e6}
+.cal-cell.has-big:not(.today){background:#f9e9e3}
+.cal-legend{display:flex;gap:18px;justify-content:center;padding:14px;font-size:12px;color:var(--sub)}
+.cal-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.dot-big{background:var(--red)}.dot-ev{background:var(--gold)}
+.cal-detail{margin:0 16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;min-height:120px;box-shadow:var(--shadow)}
+.cal-detail-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.cal-detail-date{font-size:18px;font-weight:600;font-family:"Songti SC","STSong",serif}
+.cal-detail-lunar{font-size:12px;color:var(--sub);margin-top:2px}
+.cal-ev{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.cal-ev-name{font-size:14px}
+.cal-ev-lv{font-size:11px;color:var(--red);background:var(--red-wash);padding:2px 9px;border-radius:8px}
+.cal-no-ev{color:var(--sub);font-size:13px;padding:18px 0;text-align:center}
+
+/* 分区标题 */
+.section-title{font-size:15px;font-weight:600;color:var(--ink);padding:18px 16px 10px;font-family:"Songti SC","STSong",serif}
+.section-title:before{content:"";display:inline-block;width:3px;height:14px;background:var(--red);border-radius:2px;margin-right:8px;vertical-align:-2px}
+.section-row{display:flex;align-items:center;justify-content:space-between;padding:0 16px;margin-top:16px}
+.section-title.inline{padding:0;margin:0}
+.section-title.inline:before{display:none}
+/* 图鉴 */
+.guide-card{background:var(--card);margin:10px 16px;border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;box-shadow:var(--shadow)}
+.guide-icon{width:40px;height:40px;flex:none;border-radius:12px;background:var(--red-wash);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;font-family:"Songti SC","STSong",serif}
+.guide-body{flex:1;min-width:0}
+.guide-name{font-size:15px;font-weight:600;margin-bottom:6px}
+.guide-items{font-size:13px;color:var(--ink-soft);line-height:1.7}
+.guide-rules{font-size:12px;color:var(--sub);line-height:1.8;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+.guide-row{background:var(--card);margin:8px 16px;border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--shadow)}
+.guide-row-t{font-size:14px;font-weight:600;margin-bottom:5px}
+.guide-row-d{font-size:13px;color:var(--ink-soft);line-height:1.7}
+.hero-guide-img{width:calc(100% - 32px);margin:12px 16px 0;border-radius:14px;display:block;border:1px solid var(--line)}
+
+/* 详情页 */
+.detail-hero{background:var(--card);color:var(--ink);padding:20px 20px 22px;position:relative;border-bottom:1px solid var(--line)}
+.detail-badge{display:inline-block;font-size:11px;padding:4px 11px;border-radius:10px;background:var(--red-wash);color:var(--red)}
+.detail-badge.lv3{background:var(--red);color:#fff}
+.detail-name{font-size:27px;font-weight:600;margin:10px 0 6px;font-family:"Songti SC","STSong",serif}
+.detail-deity{font-size:14px;color:var(--red-soft)}
+.detail-summary{font-size:13.5px;line-height:1.75;color:var(--ink-soft);margin-top:12px}
+.shop-group{background:var(--card);margin:10px 16px;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.shop-group-t{font-size:13px;font-weight:600;padding:11px 14px;background:#faf5e9;color:var(--ink);border-bottom:1px solid var(--line)}
+.shop-item{display:flex;align-items:flex-start;gap:11px;padding:12px 14px;font-size:14px;line-height:1.5;border-bottom:1px solid #f4eee2;cursor:pointer;transition:background .12s}
+.shop-item:active{background:#faf6ee}
+.shop-item:last-child{border-bottom:0}
+.shop-item.checked{color:#b0a396;text-decoration:line-through}
+.shop-check{width:19px;height:19px;flex:none;border:1.5px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;margin-top:1px;transition:all .18s}
+.shop-item.checked .shop-check{background:var(--red);border-color:var(--red);animation:pop .25s ease}
+.shop-item-text{flex:1;min-width:0}
+.opt-tag{display:inline-block;font-style:normal;margin-left:6px;font-size:10.5px;line-height:1;padding:4px 7px;border-radius:20px;background:var(--green-wash);color:#4a7a63;font-weight:500;white-space:nowrap;vertical-align:middle}
+.shop-group-t .opt-tag{font-size:10px;background:#f3efe6;color:#9a8b76;margin-left:8px;padding:3px 8px}
+@keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.overseas-tip{margin:10px 16px;background:var(--green-wash);border:1px solid #d6e6d8;border-radius:14px;padding:13px;font-size:12.5px;line-height:1.9;color:#3d5e45}
+.steps{padding:0 16px}
+.step{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:9px;box-shadow:var(--shadow)}
+.step-num{width:27px;height:27px;flex:none;border-radius:9px;background:var(--red-wash);color:var(--red);font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:600;font-family:"Songti SC","STSong",serif}
+.step-body{flex:1}
+.step-t{font-size:14.5px;font-weight:600}
+.step-d{font-size:13px;color:var(--ink-soft);line-height:1.7;margin-top:4px}
+
+/* 开口念词卡 */
+.prayer-card{margin:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px 16px;box-shadow:var(--shadow)}
+.prayer-h{font-size:16px;font-weight:600;color:var(--red-deep);font-family:"Songti SC","STSong",serif;margin-bottom:5px}
+.prayer-sub{font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:14px}
+.prayer-self{background:var(--gold-wash);border-radius:12px;padding:12px;margin-bottom:13px}
+.prayer-self-t{font-size:12.5px;color:var(--ink-soft);font-weight:600}
+.prayer-chips{display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:wrap}
+.prayer-chip{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);font-size:13px;padding:6px 15px;border-radius:18px;cursor:pointer;font-family:inherit;transition:all .15s}
+.prayer-chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.prayer-chip-sep{width:1px;height:16px;background:var(--line);margin:0 2px}
+.prayer-self-note{font-size:11.5px;color:var(--sub);line-height:1.6;margin-top:10px}
+.prayer-text{background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:14px 13px;font-size:14.5px;line-height:2;color:var(--ink);white-space:pre-wrap;word-break:break-all}
+.prayer-copy-row{display:flex;justify-content:flex-end;margin-top:10px}
+.prayer-copy{border:0;background:var(--red);color:#fff;font-size:13px;padding:9px 20px;border-radius:20px;cursor:pointer;font-family:inherit;font-weight:600;box-shadow:0 2px 8px rgba(177,74,56,.2)}
+.prayer-copy:active{transform:scale(.97)}
+.prayer-order{margin-top:14px}
+.prayer-order summary{font-size:12.5px;color:var(--red);cursor:pointer;list-style:none;padding:8px 0;border-top:1px solid var(--line)}
+.prayer-order summary::-webkit-details-marker{display:none}
+.prayer-order summary:before{content:"▸ ";font-size:11px}
+.prayer-order[open] summary:before{content:"▾ "}
+.prayer-order-item{display:flex;gap:10px;font-size:12.5px;line-height:1.7;padding:5px 0}
+.prayer-order-item b{color:var(--ink);flex:none;font-weight:600}
+.prayer-order-item span{color:var(--ink-soft)}
+.prayer-many{font-size:11.5px;color:var(--sub);line-height:1.7;margin-top:8px;padding:10px;background:var(--bg);border-radius:9px}
+.notice{margin:0 16px;background:var(--red-wash);border:1px solid #f0d8cf;border-radius:14px;padding:13px 14px;font-size:13px;line-height:1.9;color:#8a4a3c}
+.source-note{margin:14px 16px;font-size:11.5px;color:var(--sub);line-height:1.7}
+.disclaimer{margin:6px 16px 20px;font-size:11px;color:#a2948a;line-height:1.7;border-top:1px solid var(--line);padding-top:12px}
+
+/* 底部标签栏 */
+.tabbar{position:fixed;bottom:0;left:0;right:0;max-width:440px;margin:0 auto;height:58px;background:rgba(255,253,247,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;z-index:19}
+.tab{flex:1;background:none;border:0;color:var(--sub);font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:color .15s}
+.tab.active{color:var(--red)}
+.tab-ico{font-size:16px;font-weight:600;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#f4ede2;font-family:"Songti SC","STSong",serif;transition:all .18s}
+.tab.active .tab-ico{background:var(--red);color:#fff;transform:translateY(-1px)}
+
+/* 弹层 */
+.sheet{position:fixed;inset:0;z-index:40;display:none}
+.sheet.show{display:block}
+.sheet-backdrop{position:absolute;inset:0;background:rgba(40,28,20,.42);animation:fadeIn .2s}
+.sheet-panel{position:absolute;bottom:0;left:0;right:0;max-width:440px;margin:0 auto;background:var(--bg);border-radius:20px 20px 0 0;padding-bottom:20px;max-height:82vh;overflow-y:auto;animation:slideUp .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;padding:20px 18px 8px;font-size:18px;font-weight:600;font-family:"Songti SC","STSong",serif}
+.sheet-close{background:#f2ebe0;border:0;font-size:14px;color:var(--ink-soft);cursor:pointer;width:28px;height:28px;border-radius:50%}
+.sheet-sub{font-size:12px;color:var(--sub);padding:0 18px 12px}
+.region-list{padding:0 16px}
+.region-item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:9px;cursor:pointer;transition:all .15s}
+.region-item.active{border-color:var(--red);background:#fdf7f3;box-shadow:0 0 0 1px var(--red)}
+.region-name{font-size:15px;font-weight:600;margin-bottom:4px}
+.region-check{color:var(--red);font-size:13px}
+.region-note{font-size:12px;color:var(--ink-soft);line-height:1.6}
+.region-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.region-tags span{font-size:11px;color:var(--red-soft);background:var(--red-wash);padding:2px 9px;border-radius:8px}
+.setting-row{display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--card);margin:10px 16px;border:1px solid var(--line);border-radius:14px;padding:15px 14px}
+.setting-t{font-size:14px;font-weight:600}
+.setting-d{font-size:11.5px;color:var(--sub);line-height:1.6;margin-top:4px}
+.switch{position:relative;width:44px;height:25px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:#d5cbbd;border-radius:25px;cursor:pointer;transition:.2s}
+.switch span:before{content:"";position:absolute;width:19px;height:19px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.switch input:checked + span{background:var(--red)}
+.switch input:checked + span:before{transform:translateX(19px)}
+.reset-btn{display:block;width:calc(100% - 32px);margin:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px;font-size:14px;color:var(--ink);cursor:pointer}
+.setting-note{font-size:11px;color:#a2948a;line-height:1.8;margin:16px;text-align:center}
+
+/* 为什么层 */
+.why-card{background:var(--gold-wash);border:1px solid #ecdcb8;border-radius:14px;padding:14px 15px;margin:0 0 16px}
+.why-head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#8a6a2f;margin-bottom:8px;font-family:"Songti SC","STSong",serif}
+.why-head i{font-style:normal;background:var(--gold);color:#fff;width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+.why-text{font-size:13.5px;line-height:1.8;color:#6b5218}
+
+/* 清单说明 */
+.compare-intro{font-size:12.5px;color:var(--sub);line-height:1.7;margin-bottom:12px}
+
+/* 操作按钮 */
+.action-row{display:flex;gap:10px;margin:4px 16px 16px}
+.action-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--red);background:var(--red);color:#fff;border-radius:12px;padding:13px 8px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s}
+.action-btn.ghost{background:var(--card);color:var(--red)}
+.action-btn:active{transform:scale(.97)}
+
+/* 我家拜法 */
+.family-banner{margin:0 16px 6px;background:var(--green-wash);border:1px solid #d6e5d4;border-radius:14px;padding:13px 15px;font-size:13.5px;line-height:1.7;color:#3d5a3f}
+.family-banner-t{font-weight:600;color:#2f6b38;margin-bottom:5px;font-family:"Songti SC","STSong",serif}
+.family-elder{color:#5a6e58;font-style:italic;margin-top:4px}
+.family-edit{margin:0 16px 16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:var(--shadow)}
+.family-edit-tip{font-size:13px;color:var(--sub);line-height:1.6;margin-bottom:12px}
+.field-l{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin:12px 0 6px}
+.field-input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:15px;color:var(--ink);background:#fdfbf6;font-family:inherit;resize:vertical}
+.field-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-wash)}
+.save-family-btn{width:100%;margin-top:14px;background:var(--red);color:#fff;border:0;border-radius:11px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;transition:transform .15s}
+.save-family-btn:active{transform:scale(.98)}
+.why-fold{margin:0 16px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+.why-fold summary{padding:13px 15px;font-size:13.5px;color:#8a6a2f;cursor:pointer;background:var(--gold-wash);list-style:none}
+.why-fold summary::-webkit-details-marker{display:none}
+.why-fold summary:before{content:"+ ";font-weight:600}
+.why-fold[open] summary:before{content:"− "}
+.why-fold .why-text{padding:14px 15px}
+
+/* 提醒设置 */
+.setting-block{padding:14px 16px;border-top:1px solid var(--line)}
+.setting-block-t{font-size:12px;font-weight:600;color:#9a6d21;margin-bottom:10px;letter-spacing:.5px;font-family:"Songti SC","STSong",serif}
+.remind-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;gap:10px}
+.remind-lbl{font-size:13.5px;color:var(--ink)}
+.remind-sub{font-size:11.5px;color:var(--sub);margin-top:3px;line-height:1.5}
+.remind-sel{border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13px;color:var(--ink);background:var(--card);font-family:inherit;max-width:140px}
+.remind-btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mini-btn{flex:1;min-width:90px;border:1px solid var(--line);background:var(--card);border-radius:9px;padding:10px 6px;font-size:12px;color:var(--ink);cursor:pointer;font-family:inherit}
+.mini-btn:active{background:var(--red-wash)}
+
+/* 分享卡 */
+.share-preview{padding:16px;text-align:center}
+.share-notice{background:var(--green-wash);border:1px solid #d6e5d4;border-radius:10px;padding:9px 12px;font-size:11.5px;color:#3d5a3f;line-height:1.6;margin:0 0 14px;text-align:left}
+.share-canvas-wrap{background:#f2ebe0;border-radius:14px;padding:12px;max-height:44vh;overflow:auto;margin-bottom:12px}
+.share-canvas-wrap canvas{max-width:100%;height:auto;border-radius:8px;display:block;margin:0 auto;box-shadow:0 3px 16px rgba(60,40,25,.16)}
+.share-hint{font-size:12px;color:var(--sub);line-height:1.7;margin:0 0 10px;text-align:left}
+.share-hint b{color:var(--red);font-weight:600}
+.share-text{width:100%;height:120px;background:#fdfbf6;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.7;color:var(--ink-soft);font-family:inherit;resize:vertical;-webkit-user-select:text;user-select:text;margin-bottom:14px}
+
+/* 首页我家拜法入口 */
+.family-entry{margin:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
+.family-entry:active{transform:scale(.985)}
+.family-entry-ico{width:40px;height:40px;flex:none;border-radius:12px;overflow:hidden;background:var(--green-wash)}
+.family-entry-ico img{width:100%;height:100%;object-fit:cover}
+.family-entry-body{flex:1;text-align:left}
+.family-entry-t{font-size:14px;font-weight:600}
+.family-entry-d{font-size:12px;color:var(--sub);margin-top:3px;line-height:1.5}
+.family-entry-arrow{color:var(--sub);font-size:16px}
+
+/* 首页玩法入口 */
+.fun-entry{margin:0 16px 12px;background:linear-gradient(120deg,#fbf0d8,#fae8dc);border:1px solid #edd3a8;border-radius:15px;padding:12px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
+.fun-entry:active{transform:scale(.985)}
+.fun-entry-badge{width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--red);color:#fff;font-size:17px;font-family:"Songti SC","STSong",serif}
+.fun-entry-body{flex:1;text-align:left}
+.fun-entry-t{font-size:14px;font-weight:600;color:#8a4a2f}
+.fun-entry-d{font-size:11.5px;color:#a07a5c;margin-top:3px}
+.fun-entry-arrow{color:#a07a5c;font-size:18px}
+
+/* 人设卡玩法 */
+.persona-panel{max-height:92vh}
+.persona-body{padding:18px 20px 24px;overflow-y:auto}
+.persona-progress{height:6px;background:var(--red-wash);border-radius:3px;overflow:hidden;margin-bottom:18px}
+.persona-progress-bar{height:100%;background:var(--red);border-radius:3px;transition:width .3s}
+.persona-step{font-size:12px;color:var(--sub);text-align:center;letter-spacing:1px}
+.persona-question{font-size:21px;font-weight:600;color:var(--ink);font-family:"Songti SC","STSong",serif;text-align:center;line-height:1.5;margin:12px 0 22px}
+.persona-options{display:flex;flex-direction:column;gap:10px}
+.persona-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:14px 15px;font-size:14px;color:var(--ink);cursor:pointer;font-family:inherit;transition:transform .15s,border-color .15s,background .15s}
+.persona-option:active{transform:scale(.98);border-color:var(--red);background:var(--red-wash)}
+.po-key{width:28px;height:28px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--gold-wash);color:#8a6a2f;font-weight:600;font-size:13px}
+.persona-footnote{font-size:10.5px;color:var(--sub);text-align:center;line-height:1.6;margin-top:18px}
+.persona-result-head{text-align:center;font-size:13px;color:var(--sub);margin-bottom:12px}
+.persona-card-wrap{background:#f0e2c8;border-radius:16px;padding:12px;margin-bottom:16px;max-height:60vh;overflow:auto}
+.persona-card-wrap canvas{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:10px;box-shadow:0 4px 18px rgba(60,40,25,.18)}
+.persona-actions{display:flex;gap:10px}
+
+/* 我家拜法总览 */
+.family-hub-hero{background:var(--card);padding:24px 20px 20px;text-align:center;border-bottom:1px solid var(--line)}
+.family-hub-hero img{width:88px;height:88px;object-fit:contain;display:block;margin:0 auto 12px}
+.family-hub-hero h2{font-size:22px;font-weight:600;margin:0;font-family:"Songti SC","STSong",serif}
+.family-hub-hero p{font-size:13px;color:var(--sub);line-height:1.7;margin:8px 0 0}
+.family-hub-list{padding:8px 16px}
+.family-hub-item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:10px;box-shadow:var(--shadow);cursor:pointer}
+.family-hub-item:active{transform:scale(.985)}
+.family-hub-name{font-size:15px;font-weight:600;color:var(--red);font-family:"Songti SC","STSong",serif}
+.family-hub-line{font-size:12.5px;color:var(--ink-soft);line-height:1.65;margin-top:6px}
+.family-hub-empty{text-align:center;padding:36px 20px;color:var(--sub);font-size:13px;line-height:1.8}
+.family-hub-empty img{width:110px;height:110px;object-fit:contain;display:block;margin:0 auto 14px}
+
+/* 首次进入：地区引导 */
+.onboard{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;align-items:stretch;justify-content:center}
+.onboard-inner{width:100%;max-width:440px;overflow-y:auto;padding:38px 24px 32px;background:var(--bg);display:flex;flex-direction:column}
+.onboard-mascot-wrap{text-align:center;margin-bottom:8px}
+.onboard-mascot{width:112px;height:112px;object-fit:contain;display:inline-block;animation:lionBob 3s ease-in-out infinite}
+@keyframes lionBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+.onboard-brand{text-align:center;font-family:"Songti SC","STSong",serif;color:var(--red);font-size:15px;letter-spacing:2px;margin:2px 0 10px;font-weight:600}
+.onboard-brand span{color:var(--gold);margin:0 5px}
+.onboard-title{font-size:24px;font-weight:600;text-align:center;margin:6px 0 8px;color:var(--ink);font-family:"Songti SC","STSong",serif;letter-spacing:.5px}
+.onboard-sub{text-align:center;color:var(--sub);font-size:13.5px;line-height:1.7;margin:0 0 26px}
+.onboard-regions{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.onboard-region{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:15px;padding:16px 14px 14px;text-align:left;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s,border-color .15s,background .15s;font-family:inherit}
+.onboard-region:active{transform:scale(.96);border-color:var(--red);background:var(--red-wash)}
+.onboard-region-name{display:block;font-size:18px;font-weight:600;color:var(--ink);font-family:"Songti SC","STSong",serif}
+.onboard-region-tag{display:block;font-size:11px;color:var(--sub);margin-top:6px;line-height:1.4}
+.onboard-overseas{margin-top:16px;width:100%;display:flex;align-items:center;gap:12px;background:var(--green-wash);border:1.5px solid #d6e5d4;border-radius:15px;padding:14px 16px;cursor:pointer;text-align:left;font-family:inherit;transition:transform .15s}
+.onboard-overseas:active{transform:scale(.98)}
+.onboard-overseas-ico{font-size:20px;width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:10px}
+.onboard-overseas-text{flex:1}
+.onboard-overseas-text b{display:block;font-size:14px;color:#2f6b38}
+.onboard-overseas-text small{display:block;font-size:11px;color:#5a6e58;margin-top:3px;line-height:1.4}
+.onboard-overseas-arrow{color:#5a6e58;font-size:18px}
+
+/* 勾选设备说明 */
+.check-device-note{margin:-4px 16px 12px;background:var(--gold-wash);border:1px solid #efe0bd;border-radius:10px;padding:9px 12px;font-size:11.5px;color:#8a6a2f;line-height:1.6}
+
+/* 添加到主屏指引 */
+.install-tip{margin-top:10px;background:var(--green-wash);border:1px solid #d6e5d4;border-radius:10px;padding:10px 12px;font-size:11.5px;color:#3d5a3f;line-height:1.6}
+
+/* 我家拜法：折叠轻入口 */
+.family-edit-fold{margin:0 16px 16px;border:1.5px dashed var(--gold);border-radius:15px;background:var(--gold-wash);overflow:hidden}
+.family-edit-fold[open]{border-style:solid}
+.family-edit-summary{list-style:none;display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer}
+.family-edit-summary::-webkit-details-marker{display:none}
+.fes-ico{width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:10px;font-size:17px;color:var(--red)}
+.family-edit-summary>span:nth-child(2){flex:1}
+.family-edit-summary b{display:block;font-size:14px;color:#8a6a2f}
+.family-edit-summary small{display:block;font-size:11px;color:#a08a5c;margin-top:3px}
+.fes-arrow{color:#a08a5c;font-size:18px}
+.family-edit-fold[open] .family-edit-summary{border-bottom:1px solid #efe0bd;margin-bottom:14px}
+.family-edit-fold .family-edit{margin:0;border:0;box-shadow:none;border-radius:0;background:transparent;padding:0 15px 16px}
+
+/* 范围选择芯片 */
+.scope-row{margin-bottom:14px}
+.scope-l{display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:7px}
+.scope-chips{display:flex;flex-wrap:wrap;gap:7px}
+.scope-chips button{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:7px 12px;font-size:12px;color:var(--ink-soft);cursor:pointer;font-family:inherit}
+.scope-chips button.on{background:var(--red);border-color:var(--red);color:#fff}
+.opt-label{display:flex;align-items:baseline;gap:8px}
+.opt-label span{font-size:10.5px;color:var(--sub);font-weight:400}
+
+/* 点选芯片 */
+.pick-chips{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 7px}
+.pick-chip{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:5px 10px;font-size:11.5px;color:var(--ink-soft);cursor:pointer;font-family:inherit}
+.pick-chip.minus{color:#9a5a4a}
+.pick-chip.plus{color:#3d6b4a}
+.pick-chip.on{background:var(--red);border-color:var(--red);color:#fff}
+
+/* 我家拜法总览：分组 + 导出 */
+.hub-group-t{font-size:12px;font-weight:600;color:#9a6d21;letter-spacing:.5px;margin:8px 2px 4px;font-family:"Songti SC","STSong",serif}
+.hub-sub{font-size:10.5px;color:var(--sub);font-weight:400;margin-left:8px}
+.hub-actions{padding:4px 16px 24px}
+
+/* ===== 配图接入（第17张图批次）===== */
+/* 首页横幅：传承图覆盖，保持原尺寸比例 */
+.hero-art{object-position:center 62%}
+
+/* 人设入口：徽章换成方形小图 */
+.fun-entry-badge{overflow:hidden;padding:0;background:transparent}
+.fun-entry-badge img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+
+/* 地区引导页：左侧圆形地标图 + 右侧文字 */
+.onboard-region{display:flex;align-items:center;gap:11px;padding:12px 12px}
+.onboard-region-art{width:48px;height:48px;flex:none;border-radius:50%;object-fit:cover;border:1.5px solid var(--line);background:#f6efe3}
+.onboard-region-txt{min-width:0;flex:1}
+.onboard-region-name{font-size:16px}
+.onboard-region-tag{white-space:normal}
+
+/* 地区选择 sheet：左侧小方图 */
+.region-item{display:flex;align-items:flex-start;gap:12px}
+.region-item-art{width:46px;height:46px;flex:none;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:#f6efe3}
+.region-item-txt{min-width:0;flex:1}
+
+/* 海外入口图 */
+.onboard-overseas-art{width:40px;height:40px;flex:none;border-radius:10px;object-fit:cover;border:1px solid #d6e5d4}
+
+/* 详情页头图：横幅图 + 文字区 */
+.detail-hero{padding:0;overflow:hidden}
+.detail-cover{display:block;width:100%;height:190px;object-fit:cover;object-position:center 55%;background:#f6efe3}
+.detail-hero-body{padding:18px 20px 22px}
+
+/* 海外提示区：配图 + 文字 */
+.overseas-tip{overflow:hidden;padding:0}
+.overseas-art{display:block;width:100%;height:150px;object-fit:cover;object-position:center 45%}
+.overseas-tip-body{padding:13px}
+
+/* ===== 保存卡片引导层（微信内长按存相册）===== */
+.save-panel{max-height:88vh;overflow:auto}
+.save-body{padding:14px 16px 22px;text-align:center}
+.save-main-tip{background:var(--gold-wash);color:#8a5a1f;font-size:13.5px;font-weight:600;line-height:1.6;margin:2px 0 14px;padding:11px 12px;border-radius:11px}
+.save-img-wrap{background:#f2ebe0;border-radius:14px;padding:12px;max-height:58vh;overflow:auto;-webkit-overflow-scrolling:touch}
+.save-img-wrap img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 3px 16px rgba(60,40,25,.18);-webkit-touch-callout:default}
+.save-sub-tip{font-size:11.5px;color:var(--sub);line-height:1.6;margin:13px 4px 0}

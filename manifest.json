@@ -1,0 +1,14 @@
+{
+  "name": "拜贺贺 · 照生拜",
+  "short_name": "拜贺贺",
+  "description": "拜贺贺 · 照生拜——潮汕初一十五、时年八节拜什么、买什么、怎么拜，年轻人和海外潮汕人的民俗查询工具",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf5ea",
+  "theme_color": "#b14a38",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

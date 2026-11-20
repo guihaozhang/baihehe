@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#b14a38">
+<meta name="description" content="拜贺贺 · 照生拜——潮汕初一十五、时年八节拜什么、买什么、怎么拜，年轻人和海外潮汕人的民俗查询工具">
+<title>拜贺贺 · 照生拜</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button id="backBtn" class="icon-btn back" style="display:none">‹</button>
+    <h1 id="mainTitle">拜贺贺</h1>
+    <div class="topbar-right">
+      <button id="regionBtn" class="region-btn"><span id="regionLabel">汕头</span> ▾</button>
+      <button id="settingsBtn" class="icon-btn">⚙</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 今日 -->
+    <section id="view-today" class="view">
+      <div class="today-hero">
+        <img class="hero-art" src="assets/hero-heritage.jpg" alt="阿嬷带小孩拜贺贺" onerror="this.style.display='none'">
+        <span class="overseas-chip" id="overseasChip" style="display:none">海外版</span>
+        <div class="today-hero-body">
+          <div class="today-solar" id="todayDate">—</div>
+          <div class="today-lunar" id="lunarDate">—</div>
+          <div class="today-next" id="nextEvent">—</div>
+        </div>
+      </div>
+      <div id="verdict" class="verdict"></div>
+      <div id="familyEntry" class="family-entry" onclick="App.openFamilyHub()">
+        <div class="family-entry-ico"><img src="assets/mascot-lion-note.jpg" alt="拜贺贺小狮" onerror="this.onerror=null;this.src='assets/mascot-lion.jpg'"></div>
+        <div class="family-entry-body">
+          <div class="family-entry-t">我家拜法</div>
+          <div class="family-entry-d" id="familyEntryDesc">记下长辈的说法，下次照自家的办</div>
+        </div>
+        <div class="family-entry-arrow">›</div>
+      </div>
+      <div class="fun-entry" onclick="App.openPersona()">
+        <div class="fun-entry-badge"><img src="assets/entry-fun.jpg" alt="" onerror="this.style.display='none'"></div>
+        <div class="fun-entry-body">
+          <div class="fun-entry-t">你是哪种拜拜人？</div>
+          <div class="fun-entry-d">6 道题翻张卡，潮汕人都来对号入座</div>
+        </div>
+        <div class="fun-entry-arrow">›</div>
+      </div>
+      <div class="today-cards" id="todayCards"></div>
+      <div class="tip-bar">
+        <span class="tip-icon">!</span>
+        <span>各乡各里拜法不一样，照这个备准没错；你家有特殊讲究，记到「我家拜法」里。</span>
+      </div>
+    </section>
+
+    <!-- 日历 -->
+    <section id="view-calendar" class="view" style="display:none">
+      <div class="cal-head">
+        <button id="prevMonth" class="cal-nav">‹</button>
+        <div id="calTitle" class="cal-title">—</div>
+        <button id="nextMonth" class="cal-nav">›</button>
+      </div>
+      <div class="cal-wrap"><div id="calHolder"></div></div>
+      <div class="cal-legend">
+        <span><i class="dot-big"></i>大节</span>
+        <span><i class="dot-ev"></i>有节点</span>
+      </div>
+      <div id="calDetail" class="cal-detail"></div>
+    </section>
+
+    <!-- 图鉴 -->
+    <section id="view-guide" class="view" style="display:none">
+      <img class="hero-guide-img" src="assets/offerings-flatlay.jpg" alt="潮汕供品图鉴">
+      <div id="guideList"></div>
+    </section>
+
+    <!-- 详情 -->
+    <section id="view-detail" class="view" style="display:none">
+      <div id="detailContent"></div>
+    </section>
+
+    <!-- 我家拜法总览 -->
+    <section id="view-family" class="view" style="display:none">
+      <div id="familyContent"></div>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab active" data-tab="today"><span class="tab-ico">今</span>今日</button>
+    <button class="tab" data-tab="calendar"><span class="tab-ico">历</span>查日历</button>
+    <button class="tab" data-tab="guide"><span class="tab-ico">典</span>图鉴</button>
+  </nav>
+</div>
+
+<!-- 首次进入：地区引导 -->
+<div class="onboard" id="onboard" style="display:none">
+  <div class="onboard-inner">
+    <div class="onboard-mascot-wrap"><img class="onboard-mascot" src="assets/mascot-lion.jpg" alt="拜贺贺小狮"></div>
+    <div class="onboard-brand">拜贺贺<span>·</span>照生拜</div>
+    <h2 class="onboard-title">先告诉我，你是哪里的？</h2>
+    <p class="onboard-sub">各乡各里拜法不一样<br>选好地方，清单才对准你家</p>
+    <div class="onboard-regions" id="onboardRegions"></div>
+    <button class="onboard-overseas" id="onboardOverseas">
+      <img class="onboard-overseas-art" src="assets/region-other.jpg" alt="" onerror="this.style.display='none'">
+      <span class="onboard-overseas-text"><b>我在海外</b><small>买不到粿、纸钱受限？开海外版，附替代方案</small></span>
+      <span class="onboard-overseas-arrow">›</span>
+    </button>
+  </div>
+</div>
+
+<!-- 地区选择 -->
+<div class="sheet" id="regionSheet">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-head"><span>选择地区</span><button class="sheet-close">✕</button></div>
+    <div class="sheet-sub">同一天，不同地方拜法不同</div>
+    <div id="regionList" class="region-list"></div>
+  </div>
+</div>
+
+<!-- 设置 -->
+<div class="sheet" id="settingsSheet">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-head"><span>设置</span><button class="sheet-close">✕</button></div>
+    <div class="setting-row">
+      <div>
+        <div class="setting-t">海外版模式</div>
+        <div class="setting-d">显示买不到粿、纸钱受限等替代方案，按当地时辰拜</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="overseasToggle"><span></span></label>
+    </div>
+    <div class="setting-block">
+      <div class="setting-block-t">我家拜法</div>
+      <div class="remind-row">
+        <div>
+          <div class="remind-lbl">家族称呼</div>
+          <div class="remind-sub">填了会显示成「○家拜法」，分工卡也用这个抬头</div>
+        </div>
+        <input id="familyNameInput" class="remind-sel" type="text" placeholder="例：林" maxlength="6">
+      </div>
+    </div>
+    <div class="setting-block">
+      <div class="setting-block-t">初一十五提醒</div>
+      <div class="remind-row">
+        <div>
+          <div class="remind-lbl">开启节日提醒</div>
+          <div class="remind-sub">在初一、十五和节日当天早上提醒你</div>
+        </div>
+        <label class="switch"><input type="checkbox" id="remindToggle"><span></span></label>
+      </div>
+      <div class="remind-row">
+        <div class="remind-lbl">提前几天提醒</div>
+        <select id="remindDays" class="remind-sel">
+          <option value="0">当天早上</option>
+          <option value="1">提前 1 天</option>
+          <option value="2">提前 2 天</option>
+        </select>
+      </div>
+      <div class="remind-btns">
+        <button id="testRemindBtn" class="mini-btn">测试通知</button>
+        <button id="exportIcsBtn" class="mini-btn">下载日历提醒</button>
+        <button id="installBtn" class="mini-btn" style="display:none">添加到主屏幕</button>
+      </div>
+      <div class="remind-sub" style="margin-top:8px">"导出日历提醒"会生成系统日历文件，导入后初一十五、节日自动提醒，关掉网页也有效（推荐）。通知权限方式仅在本页打开时生效。</div>
+      <div class="install-tip" id="installTip" style="display:none"></div>
+    </div>
+    <button id="resetBtn" class="reset-btn">清空购物清单勾选</button>
+    <div class="setting-note">本工具为民俗文化整理，非迷信引导。资料仅供新手参考。<br>版本 <span id="versionTag"></span></div>
+  </div>
+</div>
+
+<!-- 家族分享卡 -->
+<div class="sheet" id="shareSheet">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-head"><span>家族分工卡</span><button class="sheet-close">✕</button></div>
+    <div class="share-preview">
+      <p class="share-notice">不用先填「我家拜法」也能用——这里直接用通用清单。想按你家规矩增减，去节日详情里记一下即可。</p>
+      <div class="share-canvas-wrap"><canvas id="shareCanvas"></canvas></div>
+      <p class="share-hint">把接龙文字发家族群最自然——清单我整理好了，大家搭把手。<b>也可长按下面文字全选复制。</b></p>
+      <textarea id="shareText" class="share-text" readonly></textarea>
+      <div class="action-row">
+        <button id="copyShareBtn" class="action-btn">复制接龙文字</button>
+        <button id="saveShareBtn" class="action-btn ghost">保存图片</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 拜拜人设卡玩法 -->
+<div class="sheet" id="personaSheet">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel persona-panel">
+    <div class="sheet-head"><span>你是哪种拜拜人？</span><button class="sheet-close">✕</button></div>
+    <div class="persona-body" id="personaBody"></div>
+  </div>
+</div>
+
+<!-- 保存卡片引导（微信内长按存相册） -->
+<div class="sheet" id="saveSheet">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel save-panel">
+    <div class="sheet-head"><span>保存卡片</span><button class="sheet-close">✕</button></div>
+    <div class="save-body">
+      <p class="save-main-tip" id="saveTipMain">长按下面的图片 → 点「保存到相册」</p>
+      <div class="save-img-wrap"><img id="saveImg" alt="长按保存这张卡片"></div>
+      <p class="save-sub-tip">存好后发家族群或朋友圈 · 每张卡都不一样，比比谁是同款</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/lunar.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/qrcode.min.js"></script>
+<script src="js/app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').then(function (reg) {
+      // 检测到新版本安装完成 → 自动刷新一次，让新代码立即生效
+      reg.addEventListener('updatefound', function () {
+        var nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', function () {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller &&
+              !sessionStorage.getItem('cs_sw_updated')) {
+            sessionStorage.setItem('cs_sw_updated', '1');
+            window.location.reload();
+          }
+        });
+      });
+    }).catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
